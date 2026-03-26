@@ -107,7 +107,7 @@
     home-manager.useUserPackages = true;
     home-manager.backupFileExtension = "bak";
     home-manager.extraSpecialArgs = {inherit inputs;};
-    home-manager.users.ray = config.flake.modules.homeManager.base;
+    home-manager.users."${config.username}" = config.flake.modules.homeManager.base;
 
     system.stateVersion = "25.11";
   };

@@ -28,7 +28,7 @@
       ];
       nixpkgs.config.allowUnfree = true;
 
-      users.users.ray = {
+      users.users."${config.username}" = {
         name = "${config.username}";
         home = "/Users/${config.username}";
         shell = defaultShell;
@@ -112,7 +112,7 @@
       home-manager.useUserPackages = false;
       home-manager.backupFileExtension = "bak";
       home-manager.extraSpecialArgs = { inherit inputs; };
-      home-manager.users.ray = config.flake.modules.homeManager.base;
+      home-manager.users."${config.username}" = config.flake.modules.homeManager.base;
 
       nix.settings.auto-optimise-store = true;
 

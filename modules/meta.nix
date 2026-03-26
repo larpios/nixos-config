@@ -4,7 +4,7 @@
   options = {
     username = lib.mkOption {
       type = lib.types.singleLineStr;
-      default = "ray";
+      default = "larpi";
       description = "Primary username across all configurations.";
     };
 

@@ -1,5 +1,5 @@
 #+TITLE: NixOS Config — Architecture
-#+AUTHOR: ray
+#+AUTHOR: larpi
 #+OPTIONS: toc:2
 
 * Overview
@@ -201,7 +201,7 @@ Example (~modules/hosts/nixos.nix~, abbreviated):
     networking.hostName = "nixos";
     # … machine-specific NixOS settings …
 
-    home-manager.users.ray = config.flake.modules.homeManager.base;
+    home-manager.users."${config.username}" = config.flake.modules.homeManager.base;
   };
 }
 #+end_src
@@ -241,7 +241,7 @@ conditionally include its packages and services.
    needed) and the shared ~_nixos/~ modules you need.
 4. Wire up Home Manager with:
    #+begin_src nix
-   home-manager.users.ray = config.flake.modules.homeManager.base;
+   home-manager.users."${config.username}" = config.flake.modules.homeManager.base;
    #+end_src
 5. No changes to ~flake.nix~ — ~import-tree~ picks up the new file
    automatically.

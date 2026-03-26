@@ -1,8 +1,8 @@
 # System user accounts.
 {config, ...}: {
-  users.users.ray = {
+  users.users."${config.username}" = {
     isNormalUser = true;
-    description = "ray";
+    description = "${config.username}";
     extraGroups = ["networkmanager" "wheel" "docker"];
   };
 }

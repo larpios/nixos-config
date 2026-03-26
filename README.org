@@ -1,5 +1,5 @@
-#+TITLE: Ray's NixOS Config
-#+AUTHOR: ray
+#+TITLE: Larpi's NixOS Config
+#+AUTHOR: larpi
 #+OPTIONS: toc:2
 
 Manages all of Ray's system configurations using the *Dendritic pattern* —
