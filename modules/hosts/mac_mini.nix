@@ -1,5 +1,5 @@
 # Host: "mac_mini" — nix-darwin configuration (aarch64-darwin).
-# Registers a deferredModule under configurations.darwin.macbook.
+# Registers a deferredModule under configurations.darwin.mac_mini.
 # Home Manager config is provided via flake.modules.homeManager.base.
 {
   config,
@@ -56,9 +56,6 @@
       enableFishIntegration = true;
     };
 
-    system.defaults.dock.autohide = true;
-    system.defaults.finder.AppleShowAllExtensions = true;
-
     system.activationScripts.postActivation.text = ''
       sudo nvram BootPreference=%00
     '';
@@ -111,15 +108,79 @@
 
     nix.settings.auto-optimise-store = true;
 
-    system.defaults.controlcenter.BatteryShowPercentage = true;
+    system = {
+      defaults = {
+        dock = {
+          # Auto show and hide dock
+          autohide = true;
+          # Remove delay for showding dock
+          autohide-delay = 0.0;
+          # How fast is the dock showing animation
+          autohide-time-modifier = 0.2;
+          expose-animation-duration = 0.2;
+          static-only = false;
+          show-process-indicators = true;
+          showhidden = true;
+          # Mouse in top right corner behavior: 5 - Start screensaver
+          wvous-tr-corner = 5;
+        };
+        finder.AppleShowAllExtensions = true;
+        controlcenter.BatteryShowPercentage = true;
+        NSGlobalDomain = {
+          # Fastest is 2
+          KeyRepeat = 2;
+          # Fastest is 15
+          InitialKeyRepeat = 15;
+          ApplePressAndHoldEnabled = false;
+          # Show extensioons in Finder
+          AppleShowAllExtensions = true;
+          # Terminate inactive apps
+          NSDisableAutomaticTermination = true;
+          # Don't upload new documents to iCloud
+          NSDocumentSaveNewDocumentsToCloud = false;
+        };
+        trackpad = {
+          Clicking = true;
+          Dragging = true;
+          TrackpadThreeFingerTapGesture = 2;
+        };
+        CustomUserPreferences = {
+          "com.apple.finder" = {
+            ShowExternalHardDrivesOnDesktop = true;
+            ShowHardDrivesOnDesktop = true;
+            ShowMountedServersOnDesktop = true;
+            ShowRemovableMediaOnDesktop = true;
+            _FXSortFoldersFirst = true;
+            # When performing a search, search the current folder by default
+            FXDefaultSearchScope = "SCcf";
+          };
+          "com.apple.desktopservices" = {
+            # Avoid creating .DS_Store files on network or USB volumes
+            DSDontWriteNetworkStores = true;
+            DSDontWriteUSBStores = true;
+          };
+          "com.apple.screencapture" = {
+            location = "~/Desktop";
+            type = "png";
+          };
+          "com.apple.screensaver" = {
+            # Require password immediately after sleep or screen saver begins
+            askForPassword = 1;
+            askForPasswordDelay = 0;
+          };
+          "com.apple.mail" = {
+            # Disable inline attachments (just show the icons)
+            DisableInlineAttachmentViewing = true;
+          };
+          "com.apple.AdLib" = {
+            allowApplePersonalizedAdvertising = false;
+          };
+        };
+      };
+      keyboard.enableKeyMapping = true;
 
-    system.defaults.NSGlobalDomain.KeyRepeat = 2;
-    system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
-
-    system.keyboard.enableKeyMapping = true;
-    system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
-
-    system.stateVersion = 4;
-    system.primaryUser = "${config.username}";
+      stateVersion = 4;
+      primaryUser = "${config.username}";
+    };
   };
 }
