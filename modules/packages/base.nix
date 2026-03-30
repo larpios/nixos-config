@@ -118,6 +118,11 @@
       zig
       zmate # Instant terminal sharing using Zellij
 
+      # Image Manipulation
+      imagemagick
+      # Image viewer
+      chafa
+
       # Media
       ffmpeg
       mpv
