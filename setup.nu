@@ -65,8 +65,8 @@ def "main system" [
   action: string = "switch"    # switch, build, or test
   os?: string                  # nixos, darwin, or android
   --hostname (-H): string = "" # hostname (auto-detected if omitted)
-  --update (-u) = false
-  --ask (-a) = false
+  --update (-u)
+  --ask (-a)
 ] {
   setup-nix-config
   let info = if $os != null { $SYSTEMS | get $os } else { get-os-info }
