@@ -10,7 +10,7 @@
 
     email = lib.mkOption {
       type = lib.types.singleLineStr;
-      default = "kjwdev01@gmail.com";
+      default = "33772093+larpios@users.noreply.github.com";
       description = "Primary email address used in user-facing config (git, jujutsu, etc.).";
     };
 
