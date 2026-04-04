@@ -138,6 +138,8 @@
           NSDisableAutomaticTermination = true;
           # Don't upload new documents to iCloud
           NSDocumentSaveNewDocumentsToCloud = false;
+          # Hide menu bar
+          _HIHideMenuBar = true;
         };
         trackpad = {
           Clicking = true;
@@ -300,6 +302,20 @@
             };
           };
         };
+        on-window-detected = [
+          {
+            "if".app-id = "com.github.wez.wezterm";
+            run = "move-node-to-workspace 1";
+          }
+          {
+            "if".app-id = "org.mozilla.floorp";
+            run = "move-node-to-workspace 2";
+          }
+          {
+            "if".app-id = "com.hnc.Discord";
+            run = "move-node-to-workspace 3";
+          }
+        ];
       };
     };
     services.sketchybar = {
