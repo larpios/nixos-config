@@ -2,7 +2,7 @@
 #+AUTHOR: larpi
 #+OPTIONS: toc:2
 
-Manages all of Ray's system configurations using the *Dendritic pattern* —
+Manages all of Larpi's system configurations using the *Dendritic pattern* —
 a thin ~flake.nix~ that hands everything off to ~import-tree~, with each
 ~.nix~ file under ~modules/~ being an independent flake-parts module.
 
@@ -104,7 +104,7 @@ Drop a ~.nix~ file under ~modules/tools/~ or ~modules/shell/~:
 1. Create ~modules/hosts/<name>.nix~
 2. Create ~modules/_hardware/<name>.nix~ (run ~nixos-generate-config~ on target)
 3. Set ~configurations.nixos.<name>.module~ in the host file
-4. Wire up home-manager: ~home-manager.users.ray = config.flake.modules.homeManager.base~
+4. Wire up home-manager: ~home-manager.users.larpi = config.flake.modules.homeManager.base~
 
 ** Enable a stack on a NixOS host
 

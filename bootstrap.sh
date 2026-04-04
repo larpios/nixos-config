@@ -134,7 +134,7 @@ apply_home() {
 main() {
   echo ""
   echo -e "${BOLD}╔══════════════════════════════════════════╗${NC}"
-  echo -e "${BOLD}║       Ray's Nix Bootstrap Script         ║${NC}"
+  echo -e "${BOLD}║      Larpi's Nix Bootstrap Script        ║${NC}"
   echo -e "${BOLD}╚══════════════════════════════════════════╝${NC}"
   echo ""
 
