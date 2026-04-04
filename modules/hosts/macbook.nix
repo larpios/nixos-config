@@ -204,7 +204,7 @@
         on-focused-monitor-changed = [
           "move-mouse monitor-lazy-center"
         ];
-        automatically-unhide-macos-hidden-apps = false;
+        automatically-unhide-macos-hidden-apps = true;
         key-mapping = {
           preset = "qwerty";
         };
@@ -317,6 +317,13 @@
           }
         ];
       };
+    };
+    services.jankyborders = {
+      enable = true;
+      active_color = "0xFFDC8A78";
+      inactive_color = "0xFF7287FD";
+      width = 7.0;
+      blur_radius = 2.0;
     };
     services.sketchybar = {
       enable = true;
