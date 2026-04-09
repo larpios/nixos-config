@@ -72,6 +72,7 @@ in
       nerd-fonts.jetbrains-mono
       jujutsu
       nushell
+      carapace
     ]);
 
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
