@@ -42,7 +42,6 @@ in
       lazygit
       mise
       which
-      nushell
       zellij
       sudo
       chezmoi
@@ -72,6 +71,7 @@ in
     ++ (with unstable; [
       nerd-fonts.jetbrains-mono
       jujutsu
+      nushell
     ]);
 
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
