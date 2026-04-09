@@ -4,75 +4,48 @@
   pkgs,
   inputs,
   ...
-}:let
+}: let
   unstable = import inputs.nixpkgs-unstable {
-      inherit (pkgs) system;
+    inherit (pkgs) system;
   };
-in
-{
+in {
   # Simply install just the packages
   environment.packages = with pkgs;
     [
-      # User-facing stuff that you really really want to have
-      vim # or some other editor, e.g. nano or neovim
-
       # Some common stuff that people expect to have
       #procps
-      killall
+      bzip2
+      cargo-binstall
+      curl
       diffutils
       findutils
-      util-linux
-      tzdata
-      hostname
-      man
+      direnv
+      gcc
+      git
       gnugrep
       gnupg
       gnused
       gnutar
-      bzip2
       gzip
+      hostname
+      killall
+      lazygit
+      less
+      man
+      openssh
+      pkg-config
+      sudo
+      tzdata
+      unzip
+      util-linux
+      vim
+      wget
+      which
       xz
       zip
-      unzip
-      less
-      curl
-      wget
-      bun
-      git
-      lazygit
-      mise
-      which
-      zellij
-      sudo
-      chezmoi
-      fish
-      neovim
-      nb
-      zoxide
-      fzf
-      ripgrep
-      fd
-      btop
-      rustup
-      direnv
-      gcc
-      yazi
-      helix
-      starship
-      bat
-      btop
-      uv
-      openssh
-      nodejs
-      bun
-      pkg-config
-      cargo-binstall
     ]
     ++ (with unstable; [
       nerd-fonts.jetbrains-mono
-      jujutsu
-      nushell
-      carapace
     ]);
 
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
@@ -80,6 +53,17 @@ in
 
   # Read the changelog before changing this value
   system.stateVersion = "24.05";
+
+  home-manager.config = {
+    imports = [./home.nix];
+    _module.args = {
+      inherit inputs;
+      inherit unstable;
+    };
+    home.stateVersion = "${config.system.stateVersion}";
+  };
+
+  terminal.font = "${unstable.nerd-fonts.jetbrains-mono}/share/fonts/truetype/NerdFonts/JetBrainsMono/JetBrainsMonoNerdFont-Regular.ttf";
 
   # Set up nix for flakes
   nix.extraOptions = ''
@@ -95,7 +79,7 @@ in
   };
 
   # user.shell = "${lib.getExe pkgs.fish}";
-  user.shell = "${pkgs.bash}/bin/bash";
+  user.shell = "${lib.getExe unstable.bash}";
 
   time.timeZone = "Asia/Seoul";
 

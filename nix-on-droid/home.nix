@@ -1,0 +1,38 @@
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  unstable,
+  ...
+}: {
+  home.packages = [
+    unstable.atuin
+    unstable.bat
+    unstable.bottom
+    unstable.btop
+    unstable.bun
+    unstable.carapace
+    unstable.chezmoi
+    unstable.fd
+    unstable.fish
+    unstable.fzf
+    unstable.helix
+    unstable.jujutsu
+    unstable.mise
+    unstable.nb
+    unstable.neovim-unwrapped
+    unstable.nerd-fonts.fira-code
+    unstable.nerd-fonts.jetbrains-mono
+    unstable.nodejs
+    unstable.nushell
+    unstable.ripgrep
+    unstable.rustup
+    unstable.starship
+    unstable.uv
+    unstable.yazi
+    unstable.zellij
+    unstable.zoxide
+  ];
+
+}

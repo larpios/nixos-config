@@ -63,23 +63,21 @@ def get-os-info []: nothing -> record {
 # Build and switch system configuration
 def "main system" [
   action: string = "switch"    # switch, build, or test
-  os?: string                  # nixos, darwin, or android
-  --hostname (-H): string = "" # hostname (auto-detected if omitted)
+  os?: string@'nu-complete os' 
+  --hostname (-H): string|nothing = null # hostname (auto-detected if omitted)
   --update (-u)
   --ask (-a)
 ] {
   setup-nix-config
   let info = if $os != null { $SYSTEMS | get $os } else { get-os-info }
-  let host = if $hostname == "" { sys host | get hostname } else { $hostname }
 
-  let host_label = if ($host | is-empty) { "" } else { $" for ($host)" }
-  print $"🔨 Building ($info.label) ($action)($host_label)..."
+  print $"🔨 Building ($info.label) ($action)($hostname)..."
 
   if $info.nh_cmd == "android" {
-    let flake_target = if ($host | is-empty) { "." } else { $".#($host)" }
+    let flake_target = if ($hostname | is-empty) { "nix-on-droid/" } else { $"nix-on-droid/#($hostname)" }
     nix-on-droid switch --flake $flake_target
   } else {
-    let h_flag = if ($host | is-empty) { [] } else { ["-H" $host] }
+    let h_flag = if ($hostname | is-empty) { [] } else { ["-H" $hostname] }
     let flags = [] 
       | append (if $ask { ["--ask"] } else { [] }) 
       | append (if $update { ["--update"] } else { [] })
@@ -247,4 +245,12 @@ def "main info" [] {
 # Helper script written in Nushell to build and switch system configurations
 def main [] {
   main info
+}
+
+def "nu-complete os" [] {
+  [
+    'nixos'
+    'darwin'
+    'android'
+  ]
 }
