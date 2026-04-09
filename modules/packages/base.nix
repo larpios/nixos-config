@@ -24,7 +24,6 @@
         cargo-watch
         chezmoi
         choose
-        clang-tools
         cmake
         delta
         difftastic
@@ -139,6 +138,7 @@
       ]
       ++ lib.optional isLinux [
         gcc
+        clang-tools
       ];
   };
 }
