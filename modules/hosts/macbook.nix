@@ -192,7 +192,8 @@
           "exec-and-forget borders"
         ];
         exec-on-workspace-change = [
-          "/bin/bash"
+          "/usr/bin/env"
+          "bash"
           "-c"
           "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE"
         ];
