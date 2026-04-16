@@ -56,8 +56,17 @@ def get-os-info []: nothing -> record {
     match $nu.os-info.name {
         'android' => { $SYSTEMS.android }
         'macos' => { $SYSTEMS.darwin }
-        'nixos' => { $SYSTEMS.nixos }
-        _ => { $SYSTEMS.linux }
+        'linux' => {
+            let os = sys host | get name | str downcase 
+            if $os =~ 'nixos' {
+                $SYSTEMS.nixos
+            } else {
+                $SYSTEMS.linux
+            }
+        }
+        _ => { 
+            error make $"Unsupported OS: ($nu.os-info.name)"
+        }
     }
 }
 
