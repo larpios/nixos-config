@@ -1,10 +1,10 @@
 #!/usr/bin/env nu
 
 const SYSTEMS = {
-  nixos:   { label: "NixOS",        nh_cmd: "os",     home: "linux" },
-  darwin:  { label: "macOS",        nh_cmd: "darwin", home: "darwin" },
+  nixos:   { label: "NixOS",        nh_cmd: "os",      home: "linux" },
+  darwin:  { label: "macOS",        nh_cmd: "darwin",  home: "darwin" },
   android: { label: "nix-on-droid", nh_cmd: "android", home: "termux" },
-  linux:   { label: "Linux",        nh_cmd: "os",     home: "linux" }
+  linux:   { label: "Linux",        nh_cmd: "os",      home: "linux" }
 }
 
 # Robust parser for key=value config files (like nix.conf)
@@ -53,11 +53,12 @@ def setup-nix-config []: nothing -> nothing {
 
 # Get current OS info from the SYSTEMS table
 def get-os-info []: nothing -> record {
-  if ($env.ANDROID_ROOT? | is-not-empty) { return $SYSTEMS.android }
-  let name = (sys host | get name | str downcase)
-  if ($name | str contains "nixos") { return $SYSTEMS.nixos }
-  if ($name | str contains "darwin") { return $SYSTEMS.darwin }
-  $SYSTEMS.linux
+    match $nu.os-info.name {
+        'android' => { $SYSTEMS.android }
+        'macos' => { $SYSTEMS.darwin }
+        'nixos' => { $SYSTEMS.nixos }
+        _ => { $SYSTEMS.linux }
+    }
 }
 
 # Build and switch system configuration
