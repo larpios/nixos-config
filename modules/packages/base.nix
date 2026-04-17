@@ -2,8 +2,8 @@
 # Contributes to flake.modules.homeManager.base.
 {inputs, ...}: {
   flake.modules.homeManager.base = {pkgs, ...}: let
-    hostSystem = pkgs.stdenv.hostPlatform.system;
-    isLinux = hostSystem == "linux";
+    isLinux = pkgs.stdenv.isLinux;
+    isDarwin = pkgs.stdenv.isDarwin;
   in {
     home.packages = with pkgs;
       [
@@ -49,6 +49,9 @@
 
         # Shell
         nushell
+        fish
+        # Shell Completion
+        bash-completion
 
         # Fish shell LSP
         fish-lsp
@@ -136,9 +139,12 @@
         # inputs.llm-agents.packages.${hostSystem}.opencode
         # inputs.llm-agents.packages.${hostSystem}.rtk
       ]
-      ++ lib.optional isLinux [
+      ++ lib.optionals isLinux [
         gcc
         clang-tools
+      ]
+      ++ lib.optionals isDarwin [
+        sketchybar
       ];
   };
 }
