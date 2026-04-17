@@ -74,25 +74,6 @@
       extra-trusted-public-keys = ["niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="];
     };
 
-    programs = {
-      bash.interactiveShellInit =
-        # zsh
-        ''
-          if ! [ "$TERM" = "dumb" ] && [ -z "$BASH_EXECUTION_STRING" ]; then
-            exec "${lib.getExe defaultShell}"
-          fi
-        '';
-
-      zsh.interactiveShellInit =
-        # zsh
-        ''
-          if ! [ "$TERM" = "dumb" ] && [ -z "$ZSH_EXECUTION_STRING" ]; then
-            exec "${lib.getExe defaultShell}"
-          fi
-        '';
-      fish.enable = true;
-    };
-
     determinateNix = {
       enable = true;
       determinateNixd = {
