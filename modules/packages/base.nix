@@ -144,6 +144,7 @@
         clang-tools
       ]
       ++ lib.optionals isDarwin [
+        aerospace
         sketchybar
       ];
   };
