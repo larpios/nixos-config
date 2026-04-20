@@ -167,139 +167,18 @@
     };
     services.aerospace = {
       enable = true;
-      settings = {
-        after-startup-command = [
-          "exec-and-forget sketchybar"
-          "exec-and-forget borders"
-        ];
-        exec-on-workspace-change = [
-          "/usr/bin/env"
-          "bash"
-          "-c"
-          "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE"
-        ];
-        enable-normalization-flatten-containers = true;
-        enable-normalization-opposite-orientation-for-nested-containers = true;
-        accordion-padding = 30;
-        default-root-container-layout = "tiles";
-        default-root-container-orientation = "auto";
-        on-focused-monitor-changed = [
-          "move-mouse monitor-lazy-center"
-        ];
-        automatically-unhide-macos-hidden-apps = true;
-        key-mapping = {
-          preset = "qwerty";
-        };
-        gaps = {
-          inner = {
-            horizontal = 24;
-            vertical = 24;
-          };
-          outer = {
-            left = 24;
-            bottom = 24;
-            top = 24;
-            right = 24;
-          };
-        };
-        mode = {
-          main = {
-            binding = {
-              alt-w = "exec-and-forget current_workspace=\"$(aerospace list-workspaces --focused)\"; aerospace close; aerospace workspace \"$current_workspace\"";
-              alt-slash = "layout tiles horizontal vertical";
-              alt-comma = "layout accordion horizontal vertical";
-              alt-h = "focus left";
-              alt-j = "focus down";
-              alt-k = "focus up";
-              alt-l = "focus right";
-              alt-shift-h = "move left";
-              alt-shift-j = "move down";
-              alt-shift-k = "move up";
-              alt-shift-l = "move right";
-              alt-minus = "resize smart -50";
-              alt-equal = "resize smart +50";
-              alt-1 = "workspace 1";
-              alt-2 = "workspace 2";
-              alt-3 = "workspace 3";
-              alt-4 = "workspace 4";
-              alt-5 = "workspace 5";
-              alt-6 = "workspace 6";
-              alt-7 = "workspace 7";
-              alt-8 = "workspace 8";
-              alt-9 = "workspace 9";
-              alt-shift-1 = "move-node-to-workspace 1";
-              alt-shift-2 = "move-node-to-workspace 2";
-              alt-shift-3 = "move-node-to-workspace 3";
-              alt-shift-4 = "move-node-to-workspace 4";
-              alt-shift-5 = "move-node-to-workspace 5";
-              alt-shift-6 = "move-node-to-workspace 6";
-              alt-shift-7 = "move-node-to-workspace 7";
-              alt-shift-8 = "move-node-to-workspace 8";
-              alt-shift-9 = "move-node-to-workspace 9";
-              alt-tab = "workspace-back-and-forth";
-              alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
-              alt-shift-semicolon = "mode service";
-            };
-          };
-          service = {
-            binding = {
-              esc = [
-                "reload-config"
-                "mode main"
-              ];
-              r = [
-                "flatten-workspace-tree"
-                "mode main"
-              ];
-              f = [
-                "layout floating tiling"
-                "mode main"
-              ];
-              backspace = [
-                "close-all-windows-but-current"
-                "mode main"
-              ];
-              alt-shift-h = [
-                "join-with left"
-                "mode main"
-              ];
-              alt-shift-j = [
-                "join-with down"
-                "mode main"
-              ];
-              alt-shift-k = [
-                "join-with up"
-                "mode main"
-              ];
-              alt-shift-l = [
-                "join-with right"
-                "mode main"
-              ];
-              down = "volume down";
-              up = "volume up";
-              shift-down = [
-                "volume set 0"
-                "mode main"
-              ];
-            };
-          };
-        };
-        on-window-detected = [
-          {
-            "if".app-id = "com.github.wez.wezterm";
-            run = "move-node-to-workspace 1";
-          }
-          {
-            "if".app-id = "org.mozilla.floorp";
-            run = "move-node-to-workspace 2";
-          }
-          {
-            "if".app-id = "com.hnc.Discord";
-            run = "move-node-to-workspace 3";
-          }
-        ];
+    };
+    launchd.user.agents.aerospace.serviceConfig = {
+      # This prevents Nix from passing its own config path,
+      # allowing AeroSpace to fall back to its default (~/.config/aerospace/aerospace.toml)
+      ProgramArguments = [
+        "/run/current-system/sw/bin/aerospace"
+      ];
+      EnvironmentVariables = {
+        PATH = "/opt/homebrew/bin:/run/current-system/sw/bin:/usr/bin:/bin:/usr/sbin:/sbin";
       };
     };
+
     services.jankyborders = {
       enable = true;
       active_color = "0xFFDC8A78";
