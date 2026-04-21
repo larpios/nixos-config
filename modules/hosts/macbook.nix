@@ -21,13 +21,14 @@
     nixpkgs.overlays = [
       inputs.neovim-nightly-overlay.overlays.default
       inputs.nur.overlays.default
+      inputs.jj-starship.overlays.default
     ];
     nixpkgs.config.allowUnfree = true;
 
     users.users."${config.username}" = {
       name = "${config.username}";
       home = "/Users/${config.username}";
-      shell = defaultShell;
+      # shell = defaultShell;
     };
 
     homebrew = {

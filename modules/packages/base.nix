@@ -67,6 +67,7 @@
         # Version Control System
         git
         jujutsu
+        jj-starship
 
         git-absorb
         gitoxide

@@ -30,6 +30,8 @@
 
     # llm-agents.url = "github:numtide/llm-agents.nix";
 
+    jj-starship.url = "github:dmmulroy/jj-starship";
+
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
