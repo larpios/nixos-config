@@ -1,13 +1,7 @@
 # Secret management using sops-nix and Bitwarden.
 # Contributes to flake.modules.homeManager.base.
-{
-  inputs,
-  ...
-}: {
-  flake.modules.homeManager.base = {
-    config,
-    ...
-  }: {
+{inputs, ...}: {
+  flake.modules.homeManager.base = {config, ...}: {
     _file = ./secrets.nix;
     imports = [inputs.sops-nix.homeManagerModules.sops];
 

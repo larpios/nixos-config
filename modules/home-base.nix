@@ -32,9 +32,9 @@
     };
 
     home.sessionPath = [
-        "$HOME/.local/bin"
-        "$HOME/.cargo/bin"
-        "$HOME/.bun/bin"
+      "$HOME/.local/bin"
+      "$HOME/.cargo/bin"
+      "$HOME/.bun/bin"
     ];
 
     home.sessionVariables = {

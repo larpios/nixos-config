@@ -30,7 +30,7 @@
         overlays = [
           inputs.neovim-nightly-overlay.overlays.default
           inputs.nur.overlays.default
-          inputs.jj-startship.overlays.default
+          inputs.jj-starship.overlays.default
         ];
       };
       modules =

@@ -34,5 +34,4 @@
     unstable.zellij
     unstable.zoxide
   ];
-
 }
