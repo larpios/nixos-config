@@ -31,8 +31,8 @@
 
     # Torrent
     services.qbittorrent = {
-        enable = true;
-        user = config.username;
+      enable = true;
+      user = config.username;
     };
 
     programs = import ../_shell/interactive-shell-init.nix {inherit lib defaultShell;};
