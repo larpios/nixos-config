@@ -25,7 +25,7 @@
   config.flake.homeConfigurations = lib.mapAttrs (name: cfg:
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = import inputs.nixpkgs {
-        system = cfg.system;
+        stdenv.hostPlatform.system = cfg.system;
         config.allowUnfree = true;
         overlays = [
           inputs.neovim-nightly-overlay.overlays.default
