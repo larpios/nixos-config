@@ -1,6 +1,10 @@
 # Base package set for all platforms.
 # Contributes to flake.modules.homeManager.base.
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   flake.modules.homeManager.base = {pkgs, ...}: let
     isLinux = pkgs.stdenv.isLinux;
     isDarwin = pkgs.stdenv.isDarwin;
@@ -88,6 +92,7 @@
         navi
         nb # local web note‑taking, bookmarking, archiving, and knowledge base
         neovim
+        tree-sitter
         nh
         nil
         ninja
@@ -143,10 +148,18 @@
       ++ lib.optionals isLinux [
         gcc
         clang-tools
+        inputs.quickshell.packages.${stdenv.hostPlatform.system}.quickshell # Top bar
+        inputs.awww.packages.${stdenv.hostPlatform.system}.awww # Wallpaper manager
+        walker # App launcher
+        elephant
       ]
       ++ lib.optionals isDarwin [
         aerospace
         sketchybar
       ];
+
+    services.walker = lib.mkIf isLinux {
+      enable = true;
+    };
   };
 }

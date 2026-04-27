@@ -32,6 +32,15 @@
 
     jj-starship.url = "github:dmmulroy/jj-starship";
 
+    # Top bar usually used with Hyprland
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Wallpaper manager used with Hyprland
+    awww.url = "git+https://codeberg.org/LGFae/awww";
+
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
