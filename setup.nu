@@ -102,14 +102,16 @@ def "main home" [
     action: string = "switch" # build, switch
     system?: string           # linux, darwin, termux
     --ask (-a)
+    --update (-u)
 ] {
     setup-nix-config
     let info = if $system != null { $SYSTEMS | get $system } else { get-os-info }
 
     let ask_flag = if $ask { ["--ask"] } else { [] }
+    let update_flag = if $update { ["--update"] } else { [] }
 
     print $"🏠 ($action)ing Home configuration for ($info.home)..."
-    nh home $action '.' -c $info.home -b bak -o result ...$ask_flag
+    nh home $action '.' -c $info.home -b bak -o result ...$ask_flag ...$update_flag
     print "✅ Done!"
 }
 
