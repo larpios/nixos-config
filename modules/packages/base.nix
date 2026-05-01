@@ -146,12 +146,14 @@
         # inputs.llm-agents.packages.${hostSystem}.rtk
       ]
       ++ lib.optionals isLinux [
-        gcc
         clang-tools
-        inputs.quickshell.packages.${stdenv.hostPlatform.system}.quickshell # Top bar
-        inputs.awww.packages.${stdenv.hostPlatform.system}.awww # Wallpaper manager
-        walker # App launcher
         elephant
+        gcc
+        grim # Screenshot tool
+        inputs.awww.packages.${stdenv.hostPlatform.system}.awww # Wallpaper manager
+        inputs.quickshell.packages.${stdenv.hostPlatform.system}.quickshell # Top bar
+        slurp # Clipboard tool
+        walker # App launcher
       ]
       ++ lib.optionals isDarwin [
         aerospace
