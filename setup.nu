@@ -77,6 +77,7 @@ def "main system" [
     --hostname (-H): string|nothing = null # hostname (auto-detected if omitted)
     --update (-u)
     --ask (-a)
+    --verbose (-v)
 ] {
     setup-nix-config
     let info = if $os != null { $SYSTEMS | get $os } else { get-os-info }
@@ -91,6 +92,7 @@ def "main system" [
         let flags = [] 
         | append (if $ask { ["--ask"] } else { [] }) 
         | append (if $update { ["--update"] } else { [] })
+        | append (if $verbose { ["--verbose"] } else { [] })
 
         nh $info.nh_cmd $action . ...$h_flag ...$flags
     }
@@ -103,15 +105,18 @@ def "main home" [
     system?: string           # linux, darwin, termux
     --ask (-a)
     --update (-u)
+    --verbose (-v)
 ] {
     setup-nix-config
     let info = if $system != null { $SYSTEMS | get $system } else { get-os-info }
 
-    let ask_flag = if $ask { ["--ask"] } else { [] }
-    let update_flag = if $update { ["--update"] } else { [] }
+    let flags = []
+    | append (if $ask { ["--ask"] } else { [] })
+    | append (if $update { ["--update"] } else { [] })
+    | append (if $verbose { ["--verbose"] } else { [] })
 
     print $"🏠 ($action)ing Home configuration for ($info.home)..."
-    nh home $action '.' -c $info.home -b bak -o result ...$ask_flag ...$update_flag
+    nh home $action '.' -c $info.home -b bak -o result ...$flags
     print "✅ Done!"
 }
 
