@@ -153,7 +153,6 @@
         inputs.awww.packages.${stdenv.hostPlatform.system}.awww # Wallpaper manager
         inputs.quickshell.packages.${stdenv.hostPlatform.system}.quickshell # Top bar
         slurp # Clipboard tool
-        walker # App launcher
       ]
       ++ lib.optionals isDarwin [
         aerospace
