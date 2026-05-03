@@ -26,7 +26,6 @@
         cachix
         cargo-binstall
         cargo-watch
-        chezmoi
         choose
         cmake
         delta

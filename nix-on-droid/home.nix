@@ -13,7 +13,6 @@
     unstable.btop
     unstable.bun
     unstable.carapace
-    unstable.chezmoi
     unstable.fd
     unstable.fish
     unstable.fzf
