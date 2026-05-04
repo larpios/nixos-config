@@ -78,6 +78,7 @@ def "main system" [
     --update (-u)
     --ask (-a)
     --verbose (-v)
+    --impure (-i)
 ] {
     setup-nix-config
     let info = if $os != null { $SYSTEMS | get $os } else { get-os-info }
@@ -93,6 +94,7 @@ def "main system" [
         | append (if $ask { ["--ask"] } else { [] }) 
         | append (if $update { ["--update"] } else { [] })
         | append (if $verbose { ["--verbose"] } else { [] })
+        | append (if $impure { ["--impure"] } else { [] })
 
         nh $info.nh_cmd $action . ...$h_flag ...$flags
     }
@@ -106,6 +108,7 @@ def "main home" [
     --ask (-a)
     --update (-u)
     --verbose (-v)
+    --impure (-i)
 ] {
     setup-nix-config
     let info = if $system != null { $SYSTEMS | get $system } else { get-os-info }
@@ -114,6 +117,7 @@ def "main home" [
     | append (if $ask { ["--ask"] } else { [] })
     | append (if $update { ["--update"] } else { [] })
     | append (if $verbose { ["--verbose"] } else { [] })
+    | append (if $impure { ["--impure"] } else { [] })
 
     print $"🏠 ($action)ing Home configuration for ($info.home)..."
     nh home $action '.' -c $info.home -b bak -o result ...$flags
