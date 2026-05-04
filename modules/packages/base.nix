@@ -26,31 +26,24 @@
         cachix
         cargo-binstall
         cargo-watch
-        choose
         cmake
         delta
         difftastic
         duf # Disk Usage/Free Utility
         dust
-        eva
         fastfetch
         fd
 
-        # Custom Prompt Engine
-        starship
+        starship # Custom Prompt Engine
 
-        # System Monitoring
-        btop
-        bottom
+        btop # System Monitoring
 
-        # Terminal Multiplexer
-        zellij
+        zellij # Terminal Multiplexer
         tmux
 
-        # TUI File Explorer
-        yazi
+        yazi # TUI File Explorer
 
-        # Shell
+        # === Shell ===
         nushell
         fish
         # Shell Completion
@@ -58,82 +51,46 @@
 
         # Fish shell LSP
         fish-lsp
-        mkcert # Simple tool to make locally trusted development certificates
-        fselect
 
-        # Fuzzy Finder
-        fzf
+        fzf # Fuzzy Finder
 
-        ripdrag # Drag and drop files into the terminal
-        gh
 
-        # Version Control System
+        # === Version Control System ===
         git
         jujutsu
         jj-starship
+        gh # GitHub CLI
 
-        git-absorb
-        gitoxide
-        gitui
-        glow
-        gpg-tui
         hexyl
-        httm
-        hyperfine
         just
-        lazygit
-        lazyjj
-        gopass # CLI password manager written in Go
-        lemmeknow
-        lsd
-        mcfly
-        mprocs
-        navi
         nb # local web note‑taking, bookmarking, archiving, and knowledge base
         neovim
         tree-sitter
-        nh
-        nil
+        nh # Nix helper
+        nil # Nix language server
         ninja
         nufmt # Nushell Formatter
         openssh
         ouch
-        procs
         ripgrep
         ripgrep-all
-        rm-improved
-        rnr
-        runiq # Efficient way to filter duplicate lines from input, à la uniq
-        ruplacer # Find and replace text in source files
         rust-parallel
         rust-script
         rustup
-        scout
-        sd # Intuitive find & replace CLI (sed alternative)
         sops
         ssh-to-age
         tealdeer
-        tere
         tokei
-        tre-command
         tree
-        trippy
         vaultwarden
-        wakatime-cli
-        xcp
-        xh
-        xxh
         zig
-        zmate # Instant terminal sharing using Zellij
 
-        # Image Manipulation
-        imagemagick
-        # Image viewer
-        chafa
 
-        # Media
-        ffmpeg
-        mpv
+        # === Media ===
+        ffmpeg      # Video manipulation
+        mpv         # Media player
+        chafa       # Image viewer
+        imagemagick # Image Manipulation
 
         # Fonts
         nerd-fonts.jetbrains-mono
@@ -146,21 +103,21 @@
       ]
       ++ lib.optionals isLinux [
         clang-tools
-        elephant
         gcc
-        grim # Screenshot tool
+
         inputs.awww.packages.${stdenv.hostPlatform.system}.awww # Wallpaper manager
         inputs.quickshell.packages.${stdenv.hostPlatform.system}.quickshell # Top bar
-        slurp # Clipboard tool
-        wox
+
+        eww
+
+        ripdrag # Drag and drop files into the terminal
+
+        grim # Screenshot tool, used together with slurp
+        slurp # Get a region of the screen
       ]
       ++ lib.optionals isDarwin [
         aerospace
         sketchybar
       ];
-
-    services.walker = lib.mkIf isLinux {
-      enable = true;
-    };
   };
 }
