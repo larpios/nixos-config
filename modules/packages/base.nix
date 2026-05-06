@@ -11,95 +11,96 @@
   in {
     home.packages = with pkgs;
       [
-        # Archiver
-        _7zz-rar
-
-        age
-        alejandra
-        ast-grep
-        bat
-        bitwarden-cli
-        gnumake
-        cmake
-        ninja
-        unzip
-        cachix
-        cargo-binstall
-        cargo-watch
-        cmake
-        delta
-        difftastic
-        duf # Disk Usage/Free Utility
-        dust
-        fastfetch
-        fd
-
-        starship # Custom Prompt Engine
-
-        btop # System Monitoring
-
-        zellij # Terminal Multiplexer
-        tmux
-
+        # === Utilities ===
         yazi # TUI File Explorer
+        btop # System Monitoring
+        bat # Cat with syntax highlighting
+        ast-grep # AST Grep
+        duf # Disk Usage/Free Utility
+        dust # A better du
+        fastfetch # System Information Tool
+        fd # Simple, fast and user-friendly alternative to find
+        hexyl # Hex viewer
+        ripgrep # Search tool
+        ripgrep-all # Search tool that supports multiple file types
+        fzf # Fuzzy Finder
+        tealdeer # Fuzzy Finder
+        tokei # Code stats
 
         # === Shell ===
+        starship # Custom Prompt Engine
         nushell
         fish
-        # Shell Completion
-        bash-completion
-
-        # Fish shell LSP
-        fish-lsp
-
-        fzf # Fuzzy Finder
-
+        bash-completion # Shell Completion
+        fish-lsp # Fish shell LSP
 
         # === Version Control System ===
         git
         jujutsu
         jj-starship
         gh # GitHub CLI
+        delta # Git diff viewer
+        difftastic # Git diff viewer
 
-        hexyl
-        just
-        nb # local web note‑taking, bookmarking, archiving, and knowledge base
+        # === Editors ===
         neovim
-        tree-sitter
-        nh # Nix helper
-        nil # Nix language server
-        ninja
-        nufmt # Nushell Formatter
-        openssh
-        ouch
-        ripgrep
-        ripgrep-all
+        tree-sitter # Neovim Syntax Highlighting
+
+        # === Languages ===
         rust-parallel
         rust-script
         rustup
-        sops
-        ssh-to-age
-        tealdeer
-        tokei
-        tree
-        vaultwarden
+        nil # Nix language server
+        alejandra # Nix formatter
         zig
 
-
         # === Media ===
+        yt-dlp      # Video Downloader
         ffmpeg      # Video manipulation
         mpv         # Media player
         chafa       # Image viewer
         imagemagick # Image Manipulation
 
-        # Fonts
+        # === Fonts ===
         nerd-fonts.jetbrains-mono
 
-        # LLM Agents
+        # === Archiver ===
+        _7zz-rar
+        ouch
+        unzip
+
+        # === LLM Agents ===
         # inputs.llm-agents.packages.${hostSystem}.claude-code
         # inputs.llm-agents.packages.${hostSystem}.gemini-cli
         # inputs.llm-agents.packages.${hostSystem}.opencode
         # inputs.llm-agents.packages.${hostSystem}.rtk
+
+        # === Build System ===
+        just
+        gnumake 
+        cmake
+        ninja
+
+        # === Security ===
+        openssh 
+        ssh-to-age
+        sops
+        age
+        bitwarden-cli
+        vaultwarden
+
+        # === Nix ===
+        nh # Nix helper
+        cachix # Nix package cache
+
+        # === Multiplexers ===
+        zellij # Modern Terminal Multiplexer in Rust
+        tmux # Terminal Multiplexer 
+
+        # === Misc ===
+        nb # local web note‑taking, bookmarking, archiving, and knowledge base
+        cargo-binstall # Install binaries from crates.io
+        cargo-watch # Watch and recompile a project on file changes
       ]
       ++ lib.optionals isLinux [
         clang-tools
@@ -116,8 +117,8 @@
         slurp # Get a region of the screen
       ]
       ++ lib.optionals isDarwin [
-        aerospace
-        sketchybar
+        aerospace # Tiling window manager
+        sketchybar # Status bar
       ];
   };
 }
