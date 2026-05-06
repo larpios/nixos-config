@@ -35,7 +35,6 @@
       "telegram-desktop"
       "thunderbird"
       "wezterm@nightly"
-      "barutsrb/tap/omniwm"
       "raycast"
     ];
     global = {
