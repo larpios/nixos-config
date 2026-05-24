@@ -27,6 +27,8 @@
         tealdeer # Fuzzy Finder
         tokei # Code stats
 
+        himalaya # Email client
+
         # === Shell ===
         starship # Custom Prompt Engine
         nushell
