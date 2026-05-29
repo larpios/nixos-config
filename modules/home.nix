@@ -36,7 +36,6 @@
       modules =
         [
           cfg.module
-          inputs.sops-nix.homeManagerModules.sops
         ]
         ++ lib.optional (cfg.homeDirectory != null) {
           home.homeDirectory = lib.mkForce cfg.homeDirectory;

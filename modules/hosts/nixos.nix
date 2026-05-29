@@ -17,7 +17,7 @@
     imports = [
       ../_hardware/nixos.nix
       ../_nixos/options.nix
-      ../_nixos/core/users.nix
+      (import ../_nixos/core/users.nix {inherit config;})
       ../_nixos/core/fonts.nix
       ../_nixos/core/locale.nix
       ../_nixos/desktop

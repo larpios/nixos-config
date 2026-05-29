@@ -192,60 +192,6 @@ def "main fmt" [] {
     print "✅ Formatting complete!"
 }
 
-# Sync secrets from Bitwarden to encrypted sops file
-def "main secrets sync" [] {
-    let deps = ["bw", "sops", "ssh-to-age"]
-    let missing = ($deps | where { (which $in | is-empty) })
-    if ($missing | is-not-empty) { error make { msg: $"❌ Missing dependencies: ($missing | str join ', ')" } }
-
-    if not ((do { bw status } | from json | get status) == "unlocked") {
-        error make { msg: "❌ Bitwarden is locked. Run 'bw unlock' first." }
-    }
-
-    print "🔐 Syncing secrets from Bitwarden..."
-    mkdir secrets
-    let age_dir = ($env.HOME | path join ".config" "sops" "age")
-    let age_keys = ($age_dir | path join "keys.txt")
-    mkdir $age_dir
-
-# Fetch SSH key for decryption
-    print "  - Fetching Default SSH Key Pair..."
-    let ssh_item = (bw get item 3859a223-3757-4676-bdca-b40a00cb7488 | from json)
-    let private_key = ($ssh_item | get -o sshKey.privateKey)
-
-    if ($private_key | is-not-empty) {
-        try {
-            $private_key | ssh-to-age -private-key | save -f $age_keys
-            chmod 600 $age_keys
-            print "  ✅ Age key derived and saved."
-        } catch { |err|
-            print $"⚠️  Error deriving age key: ($err.msg)"
-        }
-    } else {
-        print "⚠️  SSH Private Key not found in Bitwarden"
-    }
-
-# Fetch context7 API key
-    print "  - Fetching Context7 API Key..."
-    let ctx7_item = (bw list items --search context7 | from json | first)
-    let ctx7_key = ($ctx7_item | get -o fields | where name == "API Key" | get -o value.0)
-
-    if ($ctx7_key | is-empty) {
-        print "❌ Context7 API Key not found in Bitwarden"
-        return
-    }
-
-    try {
-        let tmp = (mktemp --suffix .yaml)
-        { "context7-api-key": $ctx7_key } | to yaml | save -f $tmp
-    sops --encrypt --config .sops.yaml --output secrets/secrets.yaml $tmp
-    rm $tmp
-    print "✅ Secrets synced and encrypted!"
-  } catch { |err|
-      print $"⚠️  Error syncing secrets: ($err.msg)"
-  }
-}
-
 # Show current system info and available commands
 def "main info" [] {
     let info = get-os-info
@@ -257,7 +203,6 @@ def "main info" [] {
     [
         { Command: "system [switch|build|test]", Description: "Full system rebuild (NixOS/macOS)" }
     { Command: "home [linux|darwin|termux]", Description: "Home-manager standalone switch" }
-    { Command: "secrets sync", Description: "Sync secrets from Bitwarden to sops" }
     { Command: "update [input]", Description: "Update flake inputs" }
     { Command: "gc [-d 7d]", Description: "Run garbage collection" }
     { Command: "check", Description: "Check flake for errors" }

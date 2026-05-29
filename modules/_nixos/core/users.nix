@@ -1,5 +1,8 @@
 # System user accounts.
-{config, ...}: {
+{
+  config,
+  ...
+}: {
   users.users."${config.username}" = {
     isNormalUser = true;
     description = "${config.username}";

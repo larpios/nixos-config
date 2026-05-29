@@ -4,6 +4,7 @@
   # HM catppuccin — applied everywhere
   flake.modules.homeManager.base = {...}: {
     catppuccin = {
+      autoEnable = true;
       enable = true;
       flavor = "mocha";
       anki.enable = true;
