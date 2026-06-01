@@ -141,10 +141,6 @@
           askForPassword = 1;
           askForPasswordDelay = 0;
         };
-        "com.apple.mail" = {
-          # Disable inline attachments (just show the icons)
-          DisableInlineAttachmentViewing = true;
-        };
         "com.apple.AdLib" = {
           allowApplePersonalizedAdvertising = false;
         };
