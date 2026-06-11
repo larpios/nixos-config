@@ -17,7 +17,6 @@
       eza.enable = true;
       fish.enable = true;
       fzf.enable = true;
-      gemini-cli.enable = true;
       ghostty.enable = true;
       helix.enable = true;
       nushell.enable = true;
