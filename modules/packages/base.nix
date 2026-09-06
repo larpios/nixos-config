@@ -95,8 +95,9 @@
         cachix # Nix package cache
 
         # === Multiplexers ===
-        zellij # Modern Terminal Multiplexer in Rust
+        # zellij # Modern Terminal Multiplexer in Rust
         tmux # Terminal Multiplexer 
+        herdr # Modern, Agentic Multiplexer 
 
         # === Misc ===
         nb # local web note‑taking, bookmarking, archiving, and knowledge base
