@@ -6,8 +6,8 @@
   ...
 }: {
   flake.modules.homeManager.base = {pkgs, ...}: let
-    isLinux = pkgs.stdenv.isLinux;
-    isDarwin = pkgs.stdenv.isDarwin;
+    isLinux = pkgs.stdenv.hostPlatform.isLinux;
+    isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   in {
     home.packages = with pkgs;
       [
