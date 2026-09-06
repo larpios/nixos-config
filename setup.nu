@@ -57,7 +57,7 @@ def get-os-info []: nothing -> record {
         'android' => { $SYSTEMS.android }
         'macos' => { $SYSTEMS.darwin }
         'linux' => {
-            let os = sys host | get name | str downcase 
+            let os = sys host | get name | str lowercase 
             if $os =~ 'nixos' {
                 $SYSTEMS.nixos
             } else {
