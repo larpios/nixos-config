@@ -58,7 +58,6 @@
 
         # === Media ===
         ffmpeg      # Video manipulation
-        mpv         # Media player
         chafa       # Image viewer
         imagemagick # Image Manipulation
 
