@@ -2,11 +2,13 @@
 {
   config,
   inputs,
-}: {
+}:
+{
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -29,7 +31,8 @@
   services.printing.enable = true;
 
   # Base packages
-  environment.systemPackages = with pkgs;
+  environment.systemPackages =
+    with pkgs;
     [
       vim
       wget
@@ -46,9 +49,13 @@
   # Nix settings
   nix.extraOptions = "experimental-features = nix-command flakes";
   nix.settings = {
+    trusted-users = [
+      "root"
+      "@wheel"
+    ];
     auto-optimise-store = true;
-    extra-substituters = ["https://cache.numtide.com"];
-    extra-trusted-public-keys = ["niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="];
+    extra-substituters = [ "https://cache.numtide.com" ];
+    extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
   };
   nix.gc = {
     automatic = true;
@@ -60,8 +67,8 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "bak";
-  home-manager.extraSpecialArgs = {inherit inputs;};
+  home-manager.extraSpecialArgs = { inherit inputs; };
   home-manager.users."${config.username}" = config.flake.modules.homeManager.base;
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }
