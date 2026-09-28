@@ -19,6 +19,14 @@
   ];
   nixpkgs.config.allowUnfree = true;
 
+  environment.shells = [ pkgs.nushell ];
+  # Use Bash as a POSIX layer to set up environment variables, then start Nushell
+  programs.bash.interactiveShellInit = ''
+    if [[ "$TERM" != "dumb" ]] && [[ -z "$BASH_EXECUTION_STRING" ]]; then
+      exec nu
+    fi
+  '';
+
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -27,8 +35,78 @@
   # Networking
   networking.networkmanager.enable = true;
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Core system & Crypto libs
+    libgpg-error
+    libgcrypt
+    expat
+    zlib
+    libuuid
+    libffi
+
+    # Graphics & Hardware drivers
+    mesa
+    libgbm
+    libdrm
+    libglvnd
+    vulkan-loader
+    libxkbcommon
+
+    # Windowing systems
+    wayland
+    libxcb
+    libx11
+    libxcursor
+    libxext
+    libxrandr
+    libxi
+    libxrender
+    libxfixes
+    libxdamage
+    libxtst
+
+    # Text, Fonts & Rendering engines
+    fontconfig
+    freetype
+    fribidi
+    harfbuzz
+    pango
+    cairo
+
+    # Desktop frameworks & UI
+    glib
+    dbus
+    nspr
+    nss
+    atk
+    at-spi2-atk
+    gdk-pixbuf
+    gtk3
+
+    # Audio
+    alsa-lib
+    libpulseaudio
+
+    e2fsprogs
+    krb5
+    gmp
+  ];
+
   # Printing
   services.printing.enable = true;
+
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-mozc
+      fcitx5-mozc-ut
+      fcitx5-hangul
+      fcitx5-chewing
+      fcitx5-table-extra
+    ];
+  };
 
   # Base packages
   environment.systemPackages =
@@ -40,11 +118,22 @@
       unzip
       less
       wezterm
+      firefox
+      thunderbird
       kitty
       wl-clipboard-rs
+      rofi
+      awww
+      mpv
+      vesktop
+      copyq
+      # Needed for quickshell
+      qt6.qt5compat
+      pavucontrol
+      appimage-run
     ]
     ++ [
-      inputs.quickshell.packages.${pkgs.system}.default
+      inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
   # Nix settings

@@ -5,6 +5,9 @@
     gnumake
     gcc
     pkg-config
+    nodejs
+    opencode
+    antigravity-cli
   ];
 
   virtualisation.podman = {

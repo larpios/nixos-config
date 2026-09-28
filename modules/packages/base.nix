@@ -56,8 +56,8 @@
         zig
 
         # === Media ===
-        ffmpeg      # Video manipulation
-        chafa       # Image viewer
+        ffmpeg # Video manipulation
+        chafa # Image viewer
         imagemagick # Image Manipulation
 
         # === Fonts ===
@@ -76,12 +76,12 @@
 
         # === Build System ===
         just
-        gnumake 
+        gnumake
         cmake
         ninja
 
         # === Security ===
-        openssh 
+        openssh
         ssh-to-age
         sops
         age
@@ -106,9 +106,6 @@
       ++ lib.optionals isLinux [
         clang-tools
         gcc
-
-        inputs.awww.packages.${stdenv.hostPlatform.system}.awww # Wallpaper manager
-
         eww
 
         ripdrag # Drag and drop files into the terminal
