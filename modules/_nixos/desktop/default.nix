@@ -1,5 +1,7 @@
 # Graphical desktop environment.
 {pkgs, ...}: {
+  programs.hyprland.enable = true;
+
   # Display server
   services.xserver.enable = true;
   services.xserver.xkb = {

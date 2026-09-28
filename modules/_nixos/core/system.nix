@@ -40,6 +40,7 @@
       unzip
       less
       wezterm
+      kitty
       wl-clipboard-rs
     ]
     ++ [
