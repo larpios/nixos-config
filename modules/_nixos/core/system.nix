@@ -44,7 +44,7 @@
       wl-clipboard-rs
     ]
     ++ [
-      inputs.zen-browser.packages.x86_64-linux.twilight
+      inputs.quickshell.packages.${pkgs.system}.default
     ];
 
   # Nix settings
