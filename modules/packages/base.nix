@@ -15,17 +15,16 @@
         yazi # TUI File Explorer
         btop # System Monitoring
         bat # Cat with syntax highlighting
-        ast-grep # AST Grep
         duf # Disk Usage/Free Utility
         dust # A better du
         fastfetch # System Information Tool
         fd # Simple, fast and user-friendly alternative to find
         hexyl # Hex viewer
         ripgrep # Search tool
-        ripgrep-all # Search tool that supports multiple file types
         fzf # Fuzzy Finder
         tealdeer # Fuzzy Finder
         tokei # Code stats
+        aria2
 
         himalaya # Email client
 
@@ -97,6 +96,7 @@
         # zellij # Modern Terminal Multiplexer in Rust
         tmux # Terminal Multiplexer 
         herdr # Modern, Agentic Multiplexer 
+        tuios # Another Modern Terminal Multiplexer in Go
 
         # === Misc ===
         nb # local web note‑taking, bookmarking, archiving, and knowledge base
