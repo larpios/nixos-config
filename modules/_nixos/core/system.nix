@@ -170,6 +170,8 @@
       qt6.qt5compat
       pavucontrol
       appimage-run
+      anki
+      zed-editor
     ]
     ++ [
       inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
