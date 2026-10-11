@@ -11,6 +11,7 @@
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    inputs.noctalia.nixosModules.default
   ];
 
   nixpkgs.overlays = [
@@ -34,6 +35,12 @@
 
   # Networking
   networking.networkmanager.enable = true;
+
+  programs.noctalia = {
+    enable = true;
+    recommendedServices.enable = true;
+    systemd.enable = true;
+  };
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
@@ -95,6 +102,15 @@
 
   # Printing
   services.printing.enable = true;
+
+  services.displayManager.noctalia-greeter = {
+    enable = true;
+    settings = {
+      cursor.size = 24;
+      keyboard.layout = "us";
+    };
+    # Cursor theme is provided by modules/theming/niko-cursors.nix.
+  };
 
   i18n.inputMethod = {
     enable = true;
