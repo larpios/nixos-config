@@ -115,19 +115,42 @@
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-mozc
-      fcitx5-mozc-ut
-      fcitx5-hangul
-      fcitx5-chewing
-      fcitx5-table-extra
-    ];
+    fcitx5 = {
+      waylandFrontend = true;
+      ignoreUserConfig = true;
+      addons = with pkgs; [
+        qt6Packages.fcitx5-chinese-addons
+        fcitx5-mozc
+        fcitx5-mozc-ut
+        fcitx5-hangul
+        fcitx5-chewing
+        fcitx5-table-extra
+        fcitx5-gtk
+        fcitx5-m17n
+      ];
+      settings.inputMethod = {
+        "Groups/0" = {
+          Name = "Default";
+          "Default Layout" = "us";
+          DefaultIM = "keyboard-us";
+        };
+        "Groups/0/Items/0".Name = "keyboard-us";
+        "Groups/0/Items/1".Name = "hangul";
+        "Groups/0/Items/2".Name = "mozc";
+        "Groups/0/Items/3".Name = "chewing";
+        "Groups/0/Items/4".Name = "keyboard-fi"; # Finnish
+        "Groups/0/Items/5".Name = "keyboard-ara-mac"; # Arabic Macintosh
+        "Groups/0/Items/6".Name = "cangjie5"; # ← Cangjie 5
+      };
+    };
   };
 
   # Base packages
   environment.systemPackages =
     with pkgs;
     [
+      file
+      killall
       vim
       wget
       zip
