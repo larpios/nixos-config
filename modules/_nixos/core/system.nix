@@ -100,6 +100,11 @@
     gmp
   ];
 
+  services.udev.extraRules = ''
+    # Prevent ZSA Voyager from being detected as a joystick (fixes Sekiro etc.)
+    SUBSYSTEM=="input", ATTRS{idVendor}=="3297", ATTRS{idProduct}=="1977", ENV{ID_INPUT_JOYSTICK}=""
+  '';
+
   # Printing
   services.printing.enable = true;
 
