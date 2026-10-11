@@ -7,6 +7,7 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
+      hanazono
     ];
     fontconfig.defaultFonts = {
       monospace = ["JetBrainsMono Nerd Font"];
