@@ -199,6 +199,22 @@
     options = "--delete-older-than 7d";
   };
 
+  # Make sure dconf is available (needed for gsettings / color-scheme)
+  programs.dconf.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    # Prefer the GTK portal for Settings (this is what browsers + most GTK apps query for light/dark)
+    config.common.default = [ "gtk" ];
+    # You can be more specific if you want:
+    # config.common."org.freedesktop.impl.portal.Settings" = [ "gtk" ];
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      # add others only if you actually need them (hyprland, wlr, gnome, kde…)
+    ];
+  };
+
   # Home Manager
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
