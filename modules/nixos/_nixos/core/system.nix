@@ -135,18 +135,50 @@
         fcitx5-rime
         rime-data
       ];
-      settings.inputMethod = {
-        "Groups/0" = {
-          Name = "Default";
-          "Default Layout" = "us";
-          DefaultIM = "keyboard-us";
+      settings = {
+        inputMethod = {
+          "Groups/0" = {
+            Name = "Default";
+            "Default Layout" = "us";
+            DefaultIM = "keyboard-us";
+          };
+          "Groups/0/Items/0".Name = "keyboard-us";
+          "Groups/0/Items/1".Name = "hangul";
+          "Groups/0/Items/2".Name = "mozc";
+          "Groups/0/Items/3".Name = "rime";
+          "Groups/0/Items/4".Name = "keyboard-fi"; # Finnish
+          "Groups/0/Items/5".Name = "keyboard-ara-mac"; # Arabic Macintosh
         };
-        "Groups/0/Items/0".Name = "keyboard-us";
-        "Groups/0/Items/1".Name = "hangul";
-        "Groups/0/Items/2".Name = "mozc";
-        "Groups/0/Items/3".Name = "rime";
-        "Groups/0/Items/4".Name = "keyboard-fi"; # Finnish
-        "Groups/0/Items/5".Name = "keyboard-ara-mac"; # Arabic Macintosh
+
+        globalOptions = {
+          Hotkey = {
+            EnumerateWithTriggerKeys = true;
+            EnumerateSkipFirst = false;
+            # ModifierOnlyKeyTimeout = 250;
+          };
+
+          "Hotkey/TriggerKeys" = {
+            "0" = "Control+space";
+          };
+
+          "Hotkey/EnumerateBackwardKeys" = {
+            "0" = "Control+Shift+space";
+          };
+        };
+
+        # Hangul addon config
+        addons.hangul = {
+          globalSection = {
+            Keyboard = "0"; # 0 = 두벌식
+            AutoReorder = true;
+          };
+          sections = {
+            HanjaModeToggleKey = {
+              "0" = "Alt+space";
+              "1" = "F9";
+            };
+          };
+        };
       };
     };
   };
