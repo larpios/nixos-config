@@ -4,7 +4,7 @@
 {...}: {
   flake.modules.nixos.pc = {pkgs, ...}: {
     environment.systemPackages = [
-      (pkgs.callPackage ../../pkgs/niko-cursors {})
+      (pkgs.callPackage ../../../pkgs/niko-cursors {})
     ];
 
     environment.sessionVariables = {
@@ -13,7 +13,7 @@
     };
 
     services.displayManager.noctalia-greeter.cursorTheme = {
-      package = pkgs.callPackage ../../pkgs/niko-cursors {};
+      package = pkgs.callPackage ../../../pkgs/niko-cursors {};
       name = "niko-oneshot";
     };
   };

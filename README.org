@@ -101,8 +101,8 @@ Drop a ~.nix~ file under ~modules/tools/~ or ~modules/shell/~:
 
 ** New NixOS host
 
-1. Create ~modules/hosts/<name>.nix~
-2. Create ~modules/_hardware/<name>.nix~ (run ~nixos-generate-config~ on target)
+1. Create ~modules/nixos/hosts/<name>.nix~
+2. Create ~modules/nixos/_hardware/<name>.nix~ (run ~nixos-generate-config~ on target)
 3. Set ~configurations.nixos.<name>.module~ in the host file
 4. Wire up home-manager: ~home-manager.users.larpi = config.flake.modules.homeManager.base~
 
@@ -123,17 +123,26 @@ nixos-config/
 ├── flake.nix                thin entry point
 ├── setup.nu                day-to-day helper (system, home, update, gc, check, fmt)
 ├── bootstrap.sh             bare-metal → Nix → config installer
-└── modules/
-    ├── meta.nix             shared options: username, email
-    ├── systems.nix          supported systems + formatter
-    ├── hosts/               one file per machine
-    ├── shell/               fish, nushell, starship, carapace
-    ├── tools/               atuin, jujutsu, zoxide, yazi, …
-    ├── packages/base.nix    base package set
-    ├── theming/             catppuccin
-    ├── audio/               pipewire (NixOS)
-    ├── _nixos/              NixOS system modules (skipped by import-tree)
-    └── _hardware/           per-machine hardware configs
+└── modules/                 every .nix here is a flake-parts module
+    ├── core/                flake wiring: options, systems, devshell
+    ├── home/                Home Manager modules (applied via NixOS/darwin)
+    │   ├── home.nix           builds flake.homeConfigurations
+    │   ├── home-base.nix      identity, aliases, stateVersion
+    │   ├── packages/          base package set
+    │   ├── shell/             carapace
+    │   ├── tools/             atuin, jujutsu, zoxide, yazi, …
+    │   └── theming/           catppuccin, niko-cursors
+    ├── nixos/               NixOS system config
+    │   ├── nixos.nix          builds flake.nixosConfigurations
+    │   ├── hosts/             one file per machine
+    │   ├── audio/             pipewire
+    │   ├── _nixos/            system modules (skipped by import-tree)
+    │   └── _hardware/         per-machine hardware configs
+    ├── darwin/              nix-darwin system config
+    │   ├── darwin.nix         builds flake.darwinConfigurations
+    │   ├── hosts/             one file per machine
+    │   └── _darwin/           system modules (skipped by import-tree)
+    └── _shell/              shared shell init helper (skipped by import-tree)
 #+end_src
 
 See [[file:ARCHITECTURE.org][ARCHITECTURE.org]] for the full deep-dive.

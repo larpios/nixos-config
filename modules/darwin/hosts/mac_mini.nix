@@ -19,6 +19,6 @@
 
     users.users."${config.username}".shell = defaultShell;
 
-    programs = import ../_shell/interactive-shell-init.nix {inherit lib defaultShell;};
+    programs = import ../../_shell/interactive-shell-init.nix {inherit lib defaultShell;};
   };
 }

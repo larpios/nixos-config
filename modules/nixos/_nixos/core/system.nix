@@ -114,7 +114,7 @@
       cursor.size = 24;
       keyboard.layout = "us";
     };
-    # Cursor theme is provided by modules/theming/niko-cursors.nix.
+    # Cursor theme is provided by modules/home/theming/niko-cursors.nix.
   };
 
   i18n.inputMethod = {

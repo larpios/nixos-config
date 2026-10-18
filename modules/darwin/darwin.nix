@@ -1,5 +1,5 @@
 # Builds flake.darwinConfigurations from the configurations.darwin option.
-# Each entry's module is a deferredModule — defined in modules/hosts/*.nix.
+# Each entry's module is a deferredModule — defined in modules/darwin/hosts/*.nix.
 {
   inputs,
   lib,

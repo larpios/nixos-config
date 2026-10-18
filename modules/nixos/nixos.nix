@@ -1,5 +1,5 @@
 # Builds flake.nixosConfigurations from the configurations.nixos option.
-# Each entry's module is a deferredModule — defined in modules/hosts/*.nix.
+# Each entry's module is a deferredModule — defined in modules/nixos/hosts/*.nix.
 {
   inputs,
   lib,
