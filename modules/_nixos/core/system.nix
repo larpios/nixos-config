@@ -221,6 +221,8 @@
     "apm=power_off"
   ];
 
+  security.pam.services.greetd.enableGnomeKeyring = true;
+
   # Home Manager
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
