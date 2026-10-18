@@ -132,6 +132,8 @@
         fcitx5-table-extra
         fcitx5-gtk
         fcitx5-m17n
+        fcitx5-rime
+        rime-data
       ];
       settings.inputMethod = {
         "Groups/0" = {
@@ -142,10 +144,9 @@
         "Groups/0/Items/0".Name = "keyboard-us";
         "Groups/0/Items/1".Name = "hangul";
         "Groups/0/Items/2".Name = "mozc";
-        "Groups/0/Items/3".Name = "chewing";
+        "Groups/0/Items/3".Name = "rime";
         "Groups/0/Items/4".Name = "keyboard-fi"; # Finnish
         "Groups/0/Items/5".Name = "keyboard-ara-mac"; # Arabic Macintosh
-        "Groups/0/Items/6".Name = "cangjie5"; # ← Cangjie 5
       };
     };
   };
