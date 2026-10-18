@@ -215,6 +215,12 @@
     ];
   };
 
+  # To fix ACPI issue, testing
+  boot.kernelParams = [
+    "acpi=force"
+    "apm=power_off"
+  ];
+
   # Home Manager
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
