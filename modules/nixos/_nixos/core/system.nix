@@ -183,6 +183,29 @@
     };
   };
 
+  # Automatically provision Rime user data files on user session startup
+  systemd.user.services.init-fcitx5-rime = {
+    description = "Initialize Fcitx5 Rime user directory";
+    wantedBy = [ "graphical-session.target" ];
+    after = [ "graphical-session-pre.target" ];
+    script = ''
+      RIME_DIR="$HOME/.local/share/fcitx5/rime"
+      mkdir -p "$RIME_DIR"
+
+      # Automatically symlink missing rime-data files from the Nix store
+      for file in ${pkgs.rime-data}/share/rime-data/*; do
+        target="$RIME_DIR/$(basename "$file")"
+        if [ ! -e "$target" ]; then
+          ln -s "$file" "$target"
+        fi
+      done
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+  };
+
   # Base packages
   environment.systemPackages =
     with pkgs;
